@@ -5,6 +5,7 @@ import time
 import sys
 
 import bot
+import utils
 
 
 def signal_handler(signal, frame):
@@ -25,29 +26,42 @@ while 1:
     messages = bot.get_user_messages(updates_offset)
 
     if messages == None:
-        time.sleep(5) 
+        time.sleep(5)
         continue
-
-    result = messages['result']
+    else:
+        result = messages['result']
 
     if len(result) > 0:
         for update in result:
 
-            chat_id = update['message']['chat']['id']
-            subject = update['message']['from']
+            message = update['message']
+            message_type = utils.get_message_type(message)
 
-            bot.log_message(
-                'Hello from '
-                + subject['first_name']
-                + ' ' + subject['last_name'],
-                update
-            )
+            if message_type == 'NO_TEXT':
+                # bot.leave_on_seen(message)
+                pass
 
-            bot.say_hello(chat_id, subject)
+            elif message_type == 'NO_COMMAND':
+                bot.say_cant_talk(message)
+
+            elif message_type == 'COMMAND':
+                command = utils.get_command(message)
+
+                if command == 'start':
+                    bot.say_hello(message)
+
+                elif command == 'random':
+                    bot.give_random_tip(message)
+
+                elif command == 'today':
+                    bot.give_today_tip(message)
+
+                else:
+                    bot.say_no_command(message)
 
         updates_offset = result[-1]['update_id'] + 1
 
     # Sleep time
     time.sleep(0.2)
 
-print("JSTB: Server stopped for some reason!!")
+bot.log_message('Server stopped for some reason!!')
