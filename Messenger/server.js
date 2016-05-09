@@ -26,8 +26,8 @@ const server = http.createServer((request, response) => {
 	else if (request.method === 'POST') {	
 		let json = ''
 
-		request.on('data', (data) => {
-			json += data
+		request.on('data', (chunk) => {
+			json += chunk
 		})
 
 		request.on('end', () => {
