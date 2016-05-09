@@ -31,7 +31,7 @@ const server = http.createServer((request, response) => {
 		})
 
 		request.on('end', () => {
-			bot.logMessage('POST request', JSON.parse(json))
+			bot.logMessage('POST request', json)
 			response.end()
 		})
 	}
