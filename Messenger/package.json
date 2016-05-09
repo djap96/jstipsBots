@@ -2,10 +2,10 @@
   "name": "jstips-bot",
   "version": "0.0.1",
   "description": "Webhook for JavaScript Tips Bot",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,7 @@
     "url": "https://github.com/djap96/jstipsBots/issues"
   },
   "homepage": "https://github.com/djap96/jstipsBots#readme",
-  "dependencies": {}
+  "dependencies": {
+    "moment": "^2.13.0"
+  }
 }
