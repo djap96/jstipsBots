@@ -17,6 +17,9 @@ def __bad_conection(request):
 
     if not request_json['ok']:
         log_message("Connection to Telegram failed!", request_json)
+        return True
+
+    return False
 
 
 def __url(method):
