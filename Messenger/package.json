@@ -1,0 +1,25 @@
+{
+  "name": "jstips-bot",
+  "version": "0.0.1",
+  "description": "Webhook for JavaScript Tips Bot",
+  "main": "fallback-index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djap96/jstipsBots.git"
+  },
+  "keywords": [
+    "javascript",
+    "bots",
+    "productivity",
+    "messenger"
+  ],
+  "author": "Diego Jara Palomino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/djap96/jstipsBots/issues"
+  },
+  "homepage": "https://github.com/djap96/jstipsBots#readme"
+}
