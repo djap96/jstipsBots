@@ -9,18 +9,16 @@ const bot = require('./bot')
 const port = process.env.PORT || 8000
 
 const server = http.createServer((request, response) => {
+	
 	response.statusCode = 200
 	response.setHeader('Content-Type', 'text/plain')
 
-	if(request.url === '/favicon.ico') {
-		response.end()
-		return
-	}
-
 	let query = utils.getUrlQuery(request.url)
 
-	console.log(query)
-	response.end('Helllo World\n')
+	if (!utils.validFBConnection(response, query))
+		return
+
+	response.end(query['hub.challenge'])
 })
 
 server.listen(port, () => {
