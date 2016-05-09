@@ -23,7 +23,7 @@ const server = http.createServer((request, response) => {
 		response.end(query['hub.challenge'])
 	}
 
-	else if (request.method == 'POST') {	
+	else if (request.method === 'POST') {	
 		let json = ''
 
 		request.on('data', (data) => {
@@ -32,9 +32,8 @@ const server = http.createServer((request, response) => {
 
 		request.on('end', () => {
 			bot.logMessage('POST request', JSON.parse(json))
+			response.end()
 		})
-
-		response.end()
 	}
 	
 })
