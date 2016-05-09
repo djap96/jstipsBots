@@ -2,7 +2,7 @@
 
 const url = require('url')
 
-const validFBConnection = function(response, query) {
+const validFBConnection = (response, query)  => {
 	if (!query['hub.verify_token'] || query['hub.verify_token'] !== process.env.VERIFY_TOKEN) {
 		response.end('No valid facebook verify token!')
 		return false
@@ -16,7 +16,7 @@ const validFBConnection = function(response, query) {
 	return true
 }
 
-const getUrlQuery = function(request_url) {
+const getUrlQuery = (request_url) => {
 	let params = url.parse(request_url, true)
 	let query = params.query
 

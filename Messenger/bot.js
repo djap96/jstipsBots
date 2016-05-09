@@ -2,7 +2,7 @@
 
 const moment = require('moment')
 
-const logMessage = function(message, element) {
+const logMessage = (message, element) => {
 	let now = moment()
 	let now_str = now.format('MMM DD HH:mm:SS')
 
