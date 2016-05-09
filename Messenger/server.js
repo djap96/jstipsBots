@@ -12,12 +12,15 @@ const server = http.createServer((request, response) => {
 	response.statusCode = 200
 	response.setHeader('Content-Type', 'text/plain')
 
-	if(request.url !== '/favicon.ico') {
-		let query = utils.getUrlQuery(request.url)
-		response.end('Helllo World\n')
+	if(request.url === '/favicon.ico') {
+		response.end()
+		return
 	}
 
-	response.end()
+	let query = utils.getUrlQuery(request.url)
+
+	console.log(query)
+	response.end('Helllo World\n')
 })
 
 server.listen(port, () => {
