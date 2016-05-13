@@ -23,7 +23,7 @@ const server = http.createServer((request, response) => {
 		response.end(query['hub.challenge'])
 	}
 
-	else if (request.method === 'POST') {	
+	else if (request.method === 'POST') {
 		let json = ''
 
 		request.on('data', (chunk) => {
@@ -35,7 +35,7 @@ const server = http.createServer((request, response) => {
 			response.end()
 		})
 	}
-	
+
 })
 
 server.listen(port, () => {
