@@ -23,5 +23,18 @@ const getUrlQuery = (request_url) => {
 	return query
 }
 
+const textInMessage = (json_message) => {
+
+	let entry_messaging = json_message.entry[0].messaging;
+
+	if (entry_messaging[0].message) {
+		let user_id = entry_messaging[0].sender.id
+		let text = entry_messaging[0].message.text
+
+		return text
+	}
+}
+
 module.exports.getUrlQuery = getUrlQuery
 module.exports.validFBConnection = validFBConnection
+module.exports.textInMessage = textInMessage

@@ -31,7 +31,13 @@ const server = http.createServer((request, response) => {
 		})
 
 		request.on('end', () => {
-			bot.logMessage('POST request', json)
+
+			json = JSON.parse(json)
+			let message = utils.textInMessage(json)
+
+			if (message)
+				bot.logMessage('Usuario envio: ', message)
+
 			response.end()
 		})
 	}
