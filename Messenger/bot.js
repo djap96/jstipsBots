@@ -1,6 +1,7 @@
 'use strict'
 
 const moment = require('moment')
+const Message = require('./message')
 
 const logMessage = (message, element) => {
     let now = moment()
@@ -16,37 +17,37 @@ const logMessage = (message, element) => {
 }
 
 const giveTodayTip = (json) => {
-    let entry_messaging = json.entry[0].messaging
-    let user_id = entry_messaging[0].sender.id
+    let message = new Message(json)
 
+    logMessage(message.user_id + " => " + message.text)
     logMessage("TODAY TIP!!")
 }
 
 const giveRandomTip = (json) => {
-    let entry_messaging = json.entry[0].messaging
-    let user_id = entry_messaging[0].sender.id
+    let message = new Message(json)
 
+    logMessage(message.user_id + " => " + message.text)
     logMessage("RANDOM TIP!!")
 }
 
 const giveAboutInfo = (json) => {
-    let entry_messaging = json.entry[0].messaging
-    let user_id = entry_messaging[0].sender.id
+   let message = new Message(json)
 
+    logMessage(message.user_id + " => " + message.text)
     logMessage("ABOUT INFO!!")
 }
 
 const giveShortHelp = (json) => {
-    let entry_messaging = json.entry[0].messaging
-    let user_id = entry_messaging[0].sender.id
+    let message = new Message(json)
 
+    logMessage(message.user_id + " => " + message.text)
     logMessage("SHORT HELP!!")
 }
 
 const giveLongHelp = (json) => {
-    let entry_messaging = json.entry[0].messaging
-    let user_id = entry_messaging[0].sender.id
+    let message = new Message(json)
 
+    logMessage(message.user_id + " => " + message.text)
     logMessage("LONG HELP!!")
 }
 

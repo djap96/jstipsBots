@@ -32,6 +32,8 @@ const server = http.createServer((request, response) => {
 
         request.on('end', () => {
 
+            console.log(json)
+
             json = JSON.parse(json)
             let message = utils.textInMessage(json)
 
