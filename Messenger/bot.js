@@ -15,4 +15,44 @@ const logMessage = (message, element) => {
     }
 }
 
+const giveTodayTip = (json) => {
+    let entry_messaging = json.entry[0].messaging
+    let user_id = entry_messaging[0].sender.id
+
+    logMessage("TODAY TIP!!")
+}
+
+const giveRandomTip = (json) => {
+    let entry_messaging = json.entry[0].messaging
+    let user_id = entry_messaging[0].sender.id
+
+    logMessage("RANDOM TIP!!")
+}
+
+const giveAboutInfo = (json) => {
+    let entry_messaging = json.entry[0].messaging
+    let user_id = entry_messaging[0].sender.id
+
+    logMessage("ABOUT INFO!!")
+}
+
+const giveShortHelp = (json) => {
+    let entry_messaging = json.entry[0].messaging
+    let user_id = entry_messaging[0].sender.id
+
+    logMessage("SHORT HELP!!")
+}
+
+const giveLongHelp = (json) => {
+    let entry_messaging = json.entry[0].messaging
+    let user_id = entry_messaging[0].sender.id
+
+    logMessage("LONG HELP!!")
+}
+
 module.exports.logMessage = logMessage
+module.exports.giveTodayTip = giveTodayTip
+module.exports.giveRandomTip = giveRandomTip
+module.exports.giveAboutInfo = giveAboutInfo
+module.exports.giveShortHelp = giveShortHelp
+module.exports.giveLongHelp = giveLongHelp

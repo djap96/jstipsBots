@@ -10,37 +10,51 @@ const port = process.env.PORT || 8000
 
 const server = http.createServer((request, response) => {
 
-	response.statusCode = 200
+    response.statusCode = 200
 
-	if (request.method === 'GET') {
-		response.setHeader('Content-Type', 'text/plain')
+    if (request.method === 'GET') {
+        response.setHeader('Content-Type', 'text/plain')
 
-		let query = utils.getUrlQuery(request.url)
+        let query = utils.getUrlQuery(request.url)
 
-		if (!utils.validFBConnection(response, query))
-			return
+        if (!utils.validFBConnection(response, query))
+            return
 
-		response.end(query['hub.challenge'])
-	}
+        response.end(query['hub.challenge'])
+    }
 
-	else if (request.method === 'POST') {
-		let json = ''
+    else if (request.method === 'POST') {
+        let json = ''
 
-		request.on('data', (chunk) => {
-			json += chunk
-		})
+        request.on('data', (chunk) => {
+            json += chunk
+        })
 
-		request.on('end', () => {
+        request.on('end', () => {
 
-			json = JSON.parse(json)
-			let message = utils.textInMessage(json)
+            json = JSON.parse(json)
+            let message = utils.textInMessage(json)
 
-			if (message)
-				bot.logMessage('Usuario envio: ', message)
+            if (message) {
+                message = message.toUpperCase()
 
-			response.end()
-		})
-	}
+                if (message === 'TODAY')
+                    bot.giveTodayTip(json)
+                else if (message === 'RANDOM')
+                    bot.giveRandomTip(json)
+                else if (message === 'ABOUT')
+                    bot.giveAboutInfo(json)
+                else if (message === 'HELP')
+                    bot.giveLongHelp(json)
+                else
+                    bot.giveShortHelp(json)
+            } else {
+                bot.giveShortHelp(json)
+            }
+
+            response.end()
+        })
+    }
 
 })
 
