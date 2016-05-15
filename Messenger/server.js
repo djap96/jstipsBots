@@ -1,13 +1,15 @@
 'use strict'
 
-require('dotenv').config()
-
 const http = require('http')
 const url = require('url')
+const fs = require('fs')
 
 const Message = require('./message')
 const utils = require('./utils')
 const bot = require('./bot')
+
+if (fs.existsSync('.env'))
+    require('dotenv').config()
 
 const port = process.env.PORT || 8000
 
