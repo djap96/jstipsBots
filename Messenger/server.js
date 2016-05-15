@@ -1,8 +1,11 @@
 'use strict'
 
+require('dotenv').config()
+
 const http = require('http')
 const url = require('url')
 
+const Message = require('./message')
 const utils = require('./utils')
 const bot = require('./bot')
 
@@ -35,23 +38,32 @@ const server = http.createServer((request, response) => {
             console.log(json)
 
             json = JSON.parse(json)
-            let message = utils.textInMessage(json)
 
-            if (message) {
-                message = message.toUpperCase()
+            let message = new Message(json)
 
-                if (message === 'TODAY')
-                    bot.giveTodayTip(json)
-                else if (message === 'RANDOM')
-                    bot.giveRandomTip(json)
-                else if (message === 'ABOUT')
-                    bot.giveAboutInfo(json)
-                else if (message === 'HELP')
-                    bot.giveLongHelp(json)
-                else
-                    bot.giveShortHelp(json)
-            } else {
-                bot.giveShortHelp(json)
+            if (!message.isWelcome()) {
+
+                let text = message.text
+
+                if (text)
+                    text = text.toUpperCase()
+
+                switch (text) {
+                    case 'TODAY':
+                        bot.giveTodayTip(message)
+                        break
+                    case 'RANDOM':
+                        bot.giveRandomTip(message)
+                        break
+                    case 'ABOUT':
+                        bot.giveAboutInfo(message)
+                        break
+                    case text === 'HELP':
+                        bot.giveLongHelp(message)
+                        break
+                    default:
+                        bot.giveShortHelp(message)
+                }
             }
 
             response.end()

@@ -1,5 +1,9 @@
 'use strict'
 
+const FB_GRAPH_URL = 'https://graph.facebook.com/v2.6/'
+const GRAPH_MESSAGE_URL = FB_GRAPH_URL + 'me/messages?access_token='
+
+const request = require('request')
 const moment = require('moment')
 const Message = require('./message')
 
@@ -16,39 +20,50 @@ const logMessage = (message, element) => {
     }
 }
 
-const giveTodayTip = (json) => {
-    let message = new Message(json)
+const sendMessage = (text, user_id) => {
+    let urlll = GRAPH_MESSAGE_URL + process.env.PAGE_TOKEN
 
-    logMessage(message.user_id + " => " + message.text)
-    logMessage("TODAY TIP!!")
+    request({
+        url: urlll,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json"'
+        },
+        form: {
+            'recipient': {
+                'id': user_id
+            },
+            'message': {
+                'text': text
+            }
+        }
+    })
 }
 
-const giveRandomTip = (json) => {
-    let message = new Message(json)
-
+const giveTodayTip = (message) => {
     logMessage(message.user_id + " => " + message.text)
-    logMessage("RANDOM TIP!!")
+    sendMessage("Today tip will be available soon!", message.user_id)
 }
 
-const giveAboutInfo = (json) => {
-   let message = new Message(json)
-
+const giveRandomTip = (message) => {
     logMessage(message.user_id + " => " + message.text)
-    logMessage("ABOUT INFO!!")
+    sendMessage("Random tip will be available soon!", message.user_id)
 }
 
-const giveShortHelp = (json) => {
-    let message = new Message(json)
-
+const giveAboutInfo = (message) => {
     logMessage(message.user_id + " => " + message.text)
-    logMessage("SHORT HELP!!")
+    sendMessage('This is an open source proyect, '
+        + 'feel free to collaborate or send feedback!', message.user_id)
 }
 
-const giveLongHelp = (json) => {
-    let message = new Message(json)
-
+const giveShortHelp = (message) => {
     logMessage(message.user_id + " => " + message.text)
-    logMessage("LONG HELP!!")
+    sendMessage("Text me: today, random, about or help", message.user_id)
+}
+
+const giveLongHelp = (message) => {
+    logMessage(message.user_id + " => " + message.text)
+    sendMessage("long help is not ready yet!", message.user_id)
 }
 
 module.exports.logMessage = logMessage
@@ -57,3 +72,4 @@ module.exports.giveRandomTip = giveRandomTip
 module.exports.giveAboutInfo = giveAboutInfo
 module.exports.giveShortHelp = giveShortHelp
 module.exports.giveLongHelp = giveLongHelp
+module.exports.sendMessage = sendMessage
