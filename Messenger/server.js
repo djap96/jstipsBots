@@ -2,14 +2,12 @@
 
 const http = require('http')
 const url = require('url')
-const fs = require('fs')
 
 const Message = require('./message')
 const utils = require('./utils')
 const bot = require('./bot')
 
-if (fs.existsSync('.env'))
-    require('dotenv').config()
+require('dotenv').config()
 
 const port = process.env.PORT || 8000
 
@@ -60,7 +58,7 @@ const server = http.createServer((request, response) => {
                     case 'ABOUT':
                         bot.giveAboutInfo(message)
                         break
-                    case text === 'HELP':
+                    case 'HELP':
                         bot.giveLongHelp(message)
                         break
                     default:
