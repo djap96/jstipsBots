@@ -25,7 +25,7 @@ const logMessage = (message, element) => {
 }
 
 const sendMessage = (text, user_id) => {
-    let send__message_url = GRAPH_MESSAGE_URL + process.env.PAGE_ACCES_TOKEN
+    let send__message_url = GRAPH_MESSAGE_URL + process.env.PAGE_ACCESS_TOKEN
 
     request({
         url: send__message_url,
