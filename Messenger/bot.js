@@ -21,10 +21,10 @@ const logMessage = (message, element) => {
 }
 
 const sendMessage = (text, user_id) => {
-    let urlll = GRAPH_MESSAGE_URL + process.env.PAGE_TOKEN
+    let send__message_url = GRAPH_MESSAGE_URL + process.env.PAGE_ACCES_TOKEN
 
     request({
-        url: urlll,
+        url: send__message_url,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json"'
