@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/djap96/jstipsBots#readme",
   "dependencies": {
+    "cheerio": "^0.20.0",
     "dotenv": "^2.0.0",
     "moment": "^2.13.0",
     "request": "^2.72.0"

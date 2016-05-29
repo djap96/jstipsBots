@@ -9,16 +9,16 @@ const bot = require('./bot')
 
 require('dotenv').config()
 
-const port = process.env.PORT || 8000
+const PORT = process.env.PORT || 8000
 
-const server = http.createServer((request, response) => {
+const server = http.createServer((req, response) => {
 
     response.statusCode = 200
 
-    if (request.method === 'GET') {
+    if (req.method === 'GET') {
         response.setHeader('Content-Type', 'text/plain')
 
-        let query = utils.getUrlQuery(request.url)
+        let query = utils.getUrlQuery(req.url)
 
         if (!utils.validFBConnection(response, query))
             return
@@ -26,16 +26,14 @@ const server = http.createServer((request, response) => {
         response.end(query['hub.challenge'])
     }
 
-    else if (request.method === 'POST') {
+    else if (req.method === 'POST') {
         let json = ''
 
-        request.on('data', (chunk) => {
+        req.on('data', (chunk) => {
             json += chunk
         })
 
-        request.on('end', () => {
-
-            console.log(json)
+        req.on('end', () => {
 
             json = JSON.parse(json)
 
@@ -72,6 +70,6 @@ const server = http.createServer((request, response) => {
 
 })
 
-server.listen(port, () => {
+server.listen(PORT, () => {
   bot.logMessage('JavaScript Tips Bot is alive, waiting for Zuckerberg requests...')
-});
+})
