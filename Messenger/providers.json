@@ -1,0 +1,9 @@
+{
+    "javascript": {
+        "name": "Javascript Tips",
+        "commands": ["js", "javascript"],
+        "github" : "loverajoel/jstips",
+        "customUrl": "jstips.co",
+        "type": "jekyll",
+    }
+}

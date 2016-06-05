@@ -6,9 +6,7 @@ const request = require('request')
 
 const bot = require('./bot')
 
-const LISTURL = "https://github.com/loverajoel/jstips/blob/gh-pages/README.md"
-
-const validFBConnection = (response, query)  => {
+const isValidFbConnection = (response, query)  => {
 
     if (!query['hub.verify_token'] || query['hub.verify_token'] !== process.env.VERIFY_TOKEN) {
         response.end('No valid facebook verify token!')
@@ -34,12 +32,12 @@ const getTipListAsync = (callback) => {
 
     request(LISTURL, (err, res, body) => {
         if (err) {
-            bot.logMessage('Something happend at request tip lists', err)
+            Bot.log('Something happend at request tip lists', err)
             return
         }
 
         if (res.statusCode !== 200) {
-            bot.logMessage('Github is down!?!?, Status Code: ' + res.statusCode)
+            Bot.log('Github is down!?!?, Status Code: ' + res.statusCode)
             return
         }
 
@@ -47,10 +45,10 @@ const getTipListAsync = (callback) => {
         let list = $('h1:contains(Tips list)').next()
         list = list.children()
 
-        callback(undefined,list)
+        callback(list)
     })
 }
 
 module.exports.getUrlQuery = getUrlQuery
-module.exports.validFBConnection = validFBConnection
+module.exports.isValidFbConnection = isValidFbConnection
 module.exports.getTipListAsync = getTipListAsync
